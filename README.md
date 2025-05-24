@@ -1,4 +1,4 @@
-#Customer Transaction $ Account behhaviour Analysis ( Adasi_staging-Bank-Analysis)
+### Customer Transaction $ Account behhaviour Analysis ( Adasi_staging-Bank-Analysis)
 
 ### Project Overview 
 This project is a practical SQL-based analysis focused on understanding customer transaction behavior, identifying inactive accounts, and estimating customer value.
@@ -47,18 +47,19 @@ This analysis is based on simulated bank data and includes solving multiple real
 ##### INTRESTING CODES USED 
  SQL Script: [Script Title Here]
 📁 Part of: Customer Transaction & Behavior Analysis Project
-📅 Date: [=DATE]
+📅 Date: [24/05/2025]
 👨‍💻 Author: ELIJAH UDONSAH 
 🌐 GitHub: https://github.com/yourusername/customer-behavior-sql-analysis
-SELECT 
+
+### CODES (SQL)
+<Pre>
+'''sql	
+[ SELECT 
     u.id AS owner_id,
     CONCAT(u.first_name, ' ', u.last_name) AS name,
-
     COUNT(CASE WHEN p.is_regular_savings = 1 AND s.amount > 0 THEN s.id END) AS savings_count,
     COUNT(CASE WHEN p.is_a_fund = 1 AND s.amount > 0 THEN s.id END) AS mutual_fund_count,
-
     SUM(CASE WHEN s.amount > 0 THEN s.amount + p.amount ELSE 0 END) AS total_deposit
-
 FROM 
     adashi_staging.users_customuser u
 JOIN 
@@ -72,12 +73,12 @@ GROUP BY
 HAVING 
     COUNT(CASE WHEN p.is_regular_savings = 1 AND s.amount > 0 THEN s.id END) > 0
     AND COUNT(CASE WHEN p.is_a_fund = 1 AND s.amount > 0 THEN s.id END) > 0
-
 ORDER BY 
-    total_deposit DESC;
+    total_deposit DESC;]
     
-📌 Description:
-[This query identifies high-value customers who have both a regular savings plan and a mutual fund (investment) plan, with at least one funded account in each category. For each qualified user, it returns the number of regular savings accounts, the number of mutual fund accounts, and the total amount deposited across all their plans. This insight helps the business understand customer engagement across multiple financial products and supports targeted cross-selling strategies.]
+    
+#### Description:
+This query identifies high-value customers who have both a regular savings plan and a mutual fund (investment) plan, with at least one funded account in each category. For each qualified user, it returns the number of regular savings accounts, the number of mutual fund accounts, and the total amount deposited across all their plans. This insight helps the business understand customer engagement across multiple financial products and supports targeted cross-selling strategies.
 
 🛠 Tables Used:
 - [adashi_staging.users_customuser]
