@@ -38,8 +38,58 @@ This analysis is based on simulated bank data and includes solving multiple real
 - SQL- Data Analysis
 - Tableau - Visualization
 
-  #### skills Demonstrated
+  #### Skills Demonstrated
   Data grouping, filtering, and aggregation
 	•	Conditional logic using CASE WHEN
 	•	Date calculations and time-based filters
 	•	Customer segmentation and value prediction
+
+##### INTRESTING CODES USED 
+ SQL Script: [Script Title Here]
+📁 Part of: Customer Transaction & Behavior Analysis Project
+📅 Date: [=DATE]
+👨‍💻 Author: ELIJAH UDONSAH 
+🌐 GitHub: https://github.com/yourusername/customer-behavior-sql-analysis
+SELECT 
+    u.id AS owner_id,
+    CONCAT(u.first_name, ' ', u.last_name) AS name,
+
+    COUNT(CASE WHEN p.is_regular_savings = 1 AND s.amount > 0 THEN s.id END) AS savings_count,
+    COUNT(CASE WHEN p.is_a_fund = 1 AND s.amount > 0 THEN s.id END) AS mutual_fund_count,
+
+    SUM(CASE WHEN s.amount > 0 THEN s.amount + p.amount ELSE 0 END) AS total_deposit
+
+FROM 
+    adashi_staging.users_customuser u
+JOIN 
+    adashi_staging.savings_savingsaccount s ON u.id = s.owner_id
+JOIN 
+    adashi_staging.plans_plan p ON s.plan_id = p.id
+
+GROUP BY 
+    u.id, u.first_name, u.last_name
+
+HAVING 
+    COUNT(CASE WHEN p.is_regular_savings = 1 AND s.amount > 0 THEN s.id END) > 0
+    AND COUNT(CASE WHEN p.is_a_fund = 1 AND s.amount > 0 THEN s.id END) > 0
+
+ORDER BY 
+    total_deposit DESC;
+    
+📌 Description:
+[This query identifies high-value customers who have both a regular savings plan and a mutual fund (investment) plan, with at least one funded account in each category. For each qualified user, it returns the number of regular savings accounts, the number of mutual fund accounts, and the total amount deposited across all their plans. This insight helps the business understand customer engagement across multiple financial products and supports targeted cross-selling strategies.]
+
+🛠 Tables Used:
+- [adashi_staging.users_customuser]
+- [adashi_staging.savings_savingsaccount]
+-  [ adashi_staging.plans_plan ]
+
+
+
+
+📤 Output:
+[Each row represents a customer who has at least one funded regular savings plan and one funded mutual fund plan.
+The total_deposits field reflects the combined sum of all their deposits from both plan types.]
+
+
+
