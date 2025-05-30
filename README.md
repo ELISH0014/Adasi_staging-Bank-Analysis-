@@ -91,3 +91,56 @@ The total_deposits field reflects the combined sum of all their deposits from bo
 
 
 
+
+
+
+
+
+
+2 :📁 Part of: Customer Transaction & Behavior Analysis Project
+📅 Date: [24/05/2025]
+👨‍💻 Author: ELIJAH UDONSAH
+    AIM : CUSTOMER LIFETIME VALUE (CLV) ESTIMATION
+
+### CODES (SQL)
+```sql	
+SELECT 
+    u.id AS owner_id,
+    CONCAT(u.first_name, ' ', u.last_name) AS name,
+
+    COUNT(CASE WHEN p.is_regular_savings = 1 AND s.amount > 0 THEN s.id END) AS savings_count,
+    COUNT(CASE WHEN p.is_a_fund = 1 AND s.amount > 0 THEN s.id END) AS mutual_fund_count,
+
+    SUM(CASE WHEN s.amount > 0 THEN s.amount + p.amount ELSE 0 END) AS total_deposit
+
+FROM 
+    adashi_staging.users_customuser u
+JOIN 
+    adashi_staging.savings_savingsaccount s ON u.id = s.owner_id
+JOIN 
+    adashi_staging.plans_plan p ON s.plan_id = p.id
+
+GROUP BY 
+    u.id, u.first_name, u.last_name
+
+HAVING 
+    COUNT(CASE WHEN p.is_regular_savings = 1 AND s.amount > 0 THEN s.id END) > 0
+    AND COUNT(CASE WHEN p.is_a_fund = 1 AND s.amount > 0 THEN s.id END) > 0
+
+ORDER BY 
+    total_deposit DESC;
+
+
+ Description : Customer Lifetime Value (CLV) Estimation:
+Calculates the predicted total revenue a business expects from a customer over the duration of their relationship, helping identify high-value users for targeted marketing and retention strategies.
+
+Output:
+
+   owner_id – A unique identifier for the account owner.
+name – Full name of the account owner (concatenated first and last name).
+savings_count – Number of savings-related transactions or accounts.
+mutual_fund_count – Number of mutual fund transactions or accounts.
+total_deposit – Total amount deposited by the user across all account
+
+
+`
