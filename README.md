@@ -1,4 +1,4 @@
-### Customer Transaction $ Account behhaviour Analysis ( Adasi_staging-Bank-Analysis)
+### Customer Transaction & Account Behaviour Analysis( Adasi_staging-Bank-Analysis)
 
 ### Project Overview 
 This project is a practical SQL-based analysis focused on understanding customer transaction behavior, identifying inactive accounts, and estimating customer value.
@@ -45,15 +45,12 @@ This analysis is based on simulated bank data and includes solving multiple real
 	•	Customer segmentation and value prediction
 
 ##### INTRESTING CODES USED 
- SQL Script: [Script Title Here]
+
 📁 Part of: Customer Transaction & Behavior Analysis Project
 📅 Date: [24/05/2025]
-👨‍💻 Author: ELIJAH UDONSAH 
-🌐 GitHub: https://github.com/yourusername/customer-behavior-sql-analysis
-
+👨‍💻 Author: ELIJAH UDONSAH
 ### CODES (SQL)
-<Pre>
-'''sql	
+```sql	
 [ SELECT 
     u.id AS owner_id,
     CONCAT(u.first_name, ' ', u.last_name) AS name,
@@ -80,7 +77,7 @@ ORDER BY
 #### Description:
 This query identifies high-value customers who have both a regular savings plan and a mutual fund (investment) plan, with at least one funded account in each category. For each qualified user, it returns the number of regular savings accounts, the number of mutual fund accounts, and the total amount deposited across all their plans. This insight helps the business understand customer engagement across multiple financial products and supports targeted cross-selling strategies.
 
-🛠 Tables Used:
+ Tables Used:
 - [adashi_staging.users_customuser]
 - [adashi_staging.savings_savingsaccount]
 -  [ adashi_staging.plans_plan ]
@@ -88,7 +85,7 @@ This query identifies high-value customers who have both a regular savings plan 
 
 
 
-📤 Output:
+ Output:
 [Each row represents a customer who has at least one funded regular savings plan and one funded mutual fund plan.
 The total_deposits field reflects the combined sum of all their deposits from both plan types.]
 
