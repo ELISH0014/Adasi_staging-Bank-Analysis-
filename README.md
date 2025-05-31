@@ -49,7 +49,7 @@ This analysis is based on simulated bank data and includes solving multiple real
 📁 Part of: Customer Transaction & Behavior Analysis Project
 📅 Date: [24/05/2025]
 👨‍💻 Author: ELIJAH UDONSAH
-### CODES (SQL)
+
 ```sql	
 [ SELECT 
     u.id AS owner_id,
